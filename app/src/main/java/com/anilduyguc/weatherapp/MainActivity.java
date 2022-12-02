@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity{
                 public void onLocationChanged(@NonNull Location location) {
                     Log.d("Location", ("Current Location: " + location.getLatitude() + ", " + location.getLongitude()));
                     cityName = getCityName(location.getLongitude(), location.getLatitude());
+                    Log.e("City name: ", "City:" + cityName);
                     String url = "http://api.weatherapi.com/v1/forecast.json?key=5f03b5e215794986b2c95444222411&q="+ cityName + "&days=1&aqi=yes&alerts=yes";
                     cityNameTextView.setText(cityName);
                     Log.d("Here launch()", "in launch()");
@@ -145,11 +146,15 @@ public class MainActivity extends AppCompatActivity{
             for(Address address: addressList){
                 if(address != null){
                     String city = address.getLocality();
-                    if(city != null && !city.equals(""))
+                    if(city != null && !city.equals("")){
+                        Log.e("City:", city);
                         cityName = city;
+
+                    }
                     else {
+                        Log.e("City:", "City name is:" +city);
                         Log.d("TAG", "CITY NOT FOUND");
-                        Toast.makeText(this, "User City Not Found", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(this, "User City Not Found", Toast.LENGTH_LONG).show();
                     }
                 }
             }
