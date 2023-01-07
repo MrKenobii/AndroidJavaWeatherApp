@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity{
                     Log.d("Location", ("Current Location: " + location.getLatitude() + ", " + location.getLongitude()));
                     cityName = getCityName(location.getLongitude(), location.getLatitude());
                     Log.e("City name: ", "City:" + cityName);
-                    String url = "http://api.weatherapi.com/v1/forecast.json?key=5f03b5e215794986b2c95444222411&q="+ cityName + "&days=1&aqi=yes&alerts=yes";
+                    String url = "http://api.weatherapi.com/v1/forecast.json?key=3b434811dcc44355a1f180651230601&q="+ cityName + "&days=1&aqi=yes&alerts=yes";
                     cityNameTextView.setText(cityName);
                     Log.d("Here launch()", "in launch()");
                     new HttpAsyncTask().execute(url);
@@ -168,7 +168,8 @@ public class MainActivity extends AppCompatActivity{
         loadingProgressBar.setVisibility(View.GONE);
         homeRelativeLayout.setVisibility(View.VISIBLE);
         weatherRVModels.clear();
-        String url = "http://api.weatherapi.com/v1/forecast.json?key=5f03b5e215794986b2c95444222411&q="+ cityName + "&days=1&aqi=yes&alerts=yes";
+        //cityName="Istanbul";
+        String url = "http://api.weatherapi.com/v1/forecast.json?key=3b434811dcc44355a1f180651230601&q="+ cityName + "&days=1&aqi=yes&alerts=yes";
         Log.d("City Name in getWeather", cityName);
         Log.d("Url", url);
 
@@ -208,6 +209,7 @@ public class MainActivity extends AppCompatActivity{
                 e.printStackTrace();
             }
         }, error -> Toast.makeText(MainActivity.this, "Please enter a valid city name..", Toast.LENGTH_SHORT).show());
+
         requestQueue.add(jsonObjectRequest);
     }
     public static String Get(String urlString){
@@ -217,6 +219,7 @@ public class MainActivity extends AppCompatActivity{
         try {
             url = new URL(urlString);
             httpURLConnection = (HttpURLConnection) url.openConnection();
+
             InputStream inputStream = httpURLConnection.getInputStream();
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
